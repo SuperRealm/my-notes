@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- 增加移动端性能的 -->
+    <!-- <meta name="viewport" content="initial-scale=1.0,user-scalable=no"> -->
+    <style>
+        #container{
+            width: 1920px;
+            height: 1080px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        window.onload = function(){
+            // var app =new AMap.Map('container')
+            var map = new AMap.Map('container',{
+                center:[106.57437801361084,29.606185343697145],
+                layers:[
+                    // 卫星图层
+                    new AMap.TileLayer.Satellite(),
+                    // 路网图层
+                    new AMap.TileLayer.RoadNet()
+                ],
+                zooms:[3,20],
+                zoom:20,
+                // 3D展示
+                viewMode:'3D'
+            })
+            
+            // 标记点
+            var marker = new AMap.Marker({
+                position:[106.57437801361084,29.606185343697145]
+            })
+            map.add(marker)
+            // 信息窗体
+            var infoWindow = new AMap.InfoWindow({
+                isCustom:true,
+                content:'江北区中心<span>巴蜀学校</span>',
+                offset:new AMap.Pixel(16,-45)
+            })
+            var onMakerOpen = function(e){
+                infoWindow.open(map,e.target.getPosition())
+            }
+            marker.on('click',onMakerOpen)
+            // 添加折线
+            var lineArr = [
+                [106.57439,29.60661],
+                [106.55090,29.60831],
+                [106.56540,29.59890],
+                [106.54506,29.59137]
+            ]
+            var polyline = new AMap.Polyline({
+                path:lineArr,
+                strokeColor:'red',
+                strokeWeight:5,
+                strokeStyle:'solid'
+            })
+            map.add(polyline)
+        }
+        var url = "https://webapi.amap.com/maps?v=1.4.15&key=ac575b57728f3e46ee1622ec726a6b8a"
+        var el = document.createElement('script')
+        el.src = url
+        el.charset = 'utf-8'
+        document.head.appendChild(el)
+    </script>
+    <!-- <script type="text/javascript" src="https://webapi.amap.com/maps?v=1.4.15&key=ac575b57728f3e46ee1622ec726a6b8a"></script>  -->
+</body>
+</html>

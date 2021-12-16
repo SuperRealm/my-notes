@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <title>review</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/antd/4.16.6/antd.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/antd/4.16.6/antd.min.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+<div id="app" style='margin-top: -100px;'></div>
+<script type="text/babel">
+    function getBase64(file) {
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = () => resolve(reader.result);
+            reader.onerror = error => reject(error);
+        });
+    }
+
+    class Comments extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = {
+                imgList:null,
+                fileList: [],
+                previewVisible: false,
+                previewImage: '',
+                previewTitle: '',
+                // 获取url拼接字符串信息
+                productId: '',
+                productHandle:'',
+                productImageSrc: '',
+                productTitle: '',
+                shopDomain: '',
+                showDomain:'',
+                emailId: '',
+                limit:'',
+                // 上传的过程中不可点击submit
+			    disabled: false,
+			    // video展示视频
+			    fileType: null,
+                loading:false
+            }
+        }
+
+        handleCancel = () => this.setState({previewVisible: false});
+        handlePreview = async file => {
+            if (!file.url && !file.preview) {
+                file.preview = await getBase64(file.originFileObj);
+            }
+            console.log(file.url,"url")
+            // 判断fileType是否符合格式文件
+            let fileType = file.type;
+            if (
+                fileType == 'video/mp4' ||
+                fileType == 'video/webm' ||
+                fileType == 'video/ogg'
+            ) {
+                this.setState({
+                    fileType: fileType,
+                });
+            } else {
+                this.setState({
+                    fileType: null,
+                });
+            }
+            this.setState({
+                previewImage: file.url || file.preview,
+                previewVisible: true,
+                previewTitle:
+                    file.name || file.url.substring(file.url.lastIndexOf('/') + 1),
+            });
+        };
+
+        handleChange = ({fileList}) => {
+
+                // fileUrl sourceUrl
+                let imgList = [];
+                fileList.forEach(imgItem => {
+                    if (imgItem.status === 'done') {
+                        this.setState({
+                            fileUrl: imgItem.response.data.fileUrl,
+                            disabled: false,
+                        });
+                        if (imgItem.response.code == 201) {
+                            this.setState({
+                                limit: 'The video limit 20MB',
+                                disabled: true,
+                            });
+                        } else {
+                            this.setState({
+                                limit: '',
+                                disabled: false,
+                            });
+                        }
+                        // 未上传完成submit按钮不可点击
+                    } else if (imgItem.status === 'error') {
+                        message.error(`${imgItem.name} file upload failed.`);
+                    } else {
+                        this.setState({
+                            disabled: true,
+                        });
+                    }
+
+                    if (
+                        imgItem &&
+                        imgItem.status === 'done' &&
+                        imgItem.response &&
+                        imgItem.response.data
+                    ) {
+                        imgItem.thumbUrl = imgItem.response.data.sourceUrl;
+                        imgList.push(imgItem.response.data.fileUrl);
+                    }
+                });
+                // if (file.status === 'done') {
+                //   this.props.editPicture(imgList);
+                // }
+            console.log(imgList);
+            this.setState({
+                    fileList:fileList,imgList: imgList,
+                })
+        };
+        // 拆分url获取对应的键值对
+        getQueryVariable = (variable) => {
+            var query = window.location.search.substring(1);
+            var vars = query.split("&");
+            for (var i = 0; i < vars.length; i++) {
+                var pair = vars[i].split("=");
+                if (pair[0] == variable) {
+                    return pair[1];
+                }
+            }
+            return (false);
+        }
+        onFinish = (values) => {
+            let loadingStatus = true
+            this.setState({
+                loading:loadingStatus
+            })
+            console.log('Success:', values);
+            // https://aprbeci.atomee.com/apr/emailReview
+            let data = {
+                shopDomain: this.state.shopDomain,
+                emailId: this.state.emailId,
+                productId: this.state.productId,
+                productHandle: this.state.productHandle,
+                reviewerName: values.Name,
+                reviewerArea: values.Area == undefined ? null : values.Area,
+                reviewContent: values.Textarea,
+                star: values.Rate,
+                imgList:this.state.imgList,
+            }
+
+            // const formData = new FormData();
+            // Object.keys(data).forEach(key => {
+            //     formData.append(key, data[key])
+            // });
+            // $.post("https://aprci.atomee.com/apr/emailReview", data, function (res) {
+            //     if(res.code === 200){
+            //         location.href="https://aprci.atomee.com/reviewsuccess.html?shopDomain="+`${data.shopDomain}`+"&productHandle="+`${data.productHandle}`;
+            //     }
+            // })
+            
+            $.ajax({ 
+            	type : "post", 
+            	url :"https://aprci.atomee.com/apr/emailReview",
+            	data : data, 
+            	async : false, //重点
+            	dataType:'json',
+            	success : function(res){ 
+                    location.href="https://aprci.atomee.com/reviewsuccess.html?shopDomain="+`${data.shopDomain}`+"&productHandle="+`${data.productHandle}`;
+                    loadingStatus = false
+            	} 
+            });
+
+            this.setState({
+                loading:loadingStatus
+            })
+            // var xhr = new XMLHttpRequest();
+            // xhr.open("POST", "https://aprci.atomee.com/apr/emailReview", true);
+            // //xhr.setRequestHeader("Content-type","application/json");
+            // xhr.onreadystatechange = function(){
+            //     var XMLHttpReq = xhr;
+            //     if (XMLHttpReq.readyState == 4 && XMLHttpReq.status == 200) {
+            //             var text = XMLHttpReq.responseText;
+            //             console.log(text);
+            //         }
+            // };
+            // xhr.send(data);
+        };
+        onFinishFailed = (errorInfo) => {
+            console.log('Failed:', errorInfo);
+        };
+
+        componentDidMount() {
+            let shopdomain = this.getQueryVariable("shopDomain")
+             
+            var showDomainRes = ''
+            $.ajax({ 
+            	type : "post", 
+            	url :"https://aprci.atomee.com/apr/getDomain",
+            	data : {shopDomain:shopdomain}, 
+            	async : false, //重点
+            	dataType:'json',
+            	success : function(res){ 
+                    showDomainRes = res.data.domain
+            	} 
+            });
+
+            // $.post("http://reviewstest.okaysou.com/apr/getDomain", {shopDomain:shopdomain}, function (res) {
+            //     if(res.code != 200){
+            //         var shopDomain = res.data.domain
+            //         var b = 12
+            //         // return shopDomain;
+            //         // that.setState({
+            //         //     showDomain:shopDomain
+            //         // })
+            //     }
+            // })
+            let productId = this.getQueryVariable("productId")
+            let productHandle = this.getQueryVariable("productHandle")
+            let productImageSrc = this.getQueryVariable("productImageSrc")
+            let productTitle = this.getQueryVariable("productTitle")
+            let shopDomain = this.getQueryVariable("shopDomain")
+            let showDomain = showDomainRes
+            let emailId = this.getQueryVariable("emailId")
+            this.setState({
+                productId: productId,
+                productImageSrc: productImageSrc,
+                productTitle: productTitle.toString().replace(new RegExp("%20","g")," "),
+                shopDomain: shopDomain,
+                showDomain: showDomain,
+                emailId: emailId,
+                productHandle: productHandle,
+            })
+            
+        }
+
+        render() {
+            const {TextArea} = antd.Input;
+            const { previewVisible, previewImage, previewTitle, fileList } = this.state;
+            return (
+                <div className="comments" style={{backgroundColor: "#f1f4f9", padding: 50}}>
+                    <div style={{margin: '100px auto', width: 800, height: 800}}>
+                        <p>
+                            {/* 埋点 */}
+                            <img src="https://aprci.atomee.com/img/domin.png" alt=""/>
+                            <span>{this.state.showDomain}</span>
+                            <img style={{display: 'none', margin: '0 auto'}}
+                                 src={"https://aprci.atomee.com/apr/click?emailId=" + `${this.state.emailId}`}
+                                 alt="Product Image"/>
+                        </p>
+                        <div style={{width: 800, height: 800, backgroundColor: '#ffffff', borderRadius: 10}}>
+                            <div>
+                                <h2 style={{textAlign: 'center', marginTop: 10, paddingTop: 10}}>We really need your
+                                    valuable advice</h2>
+                                <div style={{display: 'flex', justifyContent: 'center'}}>
+                                    <img style={{width: 120, height: 120}} src={this.state.productImageSrc} alt=""/>
+                                </div>
+                                <p style={{textAlign: 'center', marginTop: 10}}>{this.state.productTitle}</p>
+                                <div style={{padding: 20}}>
+                                    <antd.Form
+                                        name="basic"
+                                        onFinish={this.onFinish}
+                                        onFinishFailed={this.onFinishFailed}
+                                    >
+                                        <div style={{textAlign: 'center'}}>
+                                            <antd.Form.Item
+                                                name="Rate"
+                                                rules={[{required: true, message: 'Please input your rate!'}]}
+                                            >
+                                                <antd.Rate/>
+                                            </antd.Form.Item>
+                                        </div>
+                                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                                            <div>
+                                                <p>Name:</p>
+                                                <antd.Form.Item
+                                                    name="Name"
+                                                    rules={[
+                                                        {
+                                                            required: true, message: 'Please input your name!'
+                                                        },
+
+                                                    ]}
+                                                >
+                                                    <antd.Input placeholder="Name" style={{width: 366, height: 36}}/>
+                                                </antd.Form.Item>
+                                            </div>
+                                            <div>
+                                                <p>Country(Optional):</p>
+                                                <antd.Form.Item
+                                                    name="Area"
+                                                    style={{width: 366, height: 36}}
+                                                    // rules={[{required: true, message: 'Please input your Area!'}]}
+                                                >
+                                                    <antd.Select
+                                                        placeholder="Area"
+                                                        defaultValue={'Select area'}
+                                                    >
+                                                        <Option value="Afghanistan">Afghanistan</Option>
+                                                        <Option value="Åland Islands">Åland Islands</Option>
+                                                        <Option value="Albania">Albania</Option>
+                                                        <Option value="Algeria">Algeria</Option>
+                                                        <Option value="American Samoa">American Samoa</Option>
+                                                        <Option value="Andorra">Andorra</Option>
+                                                        <Option value="Angola">Angola</Option>
+                                                        <Option value="Anguilla">Anguilla</Option>
+                                                        <Option value="Antarctica">Antarctica</Option>
+                                                        <Option
+                                                            value="Antigua &amp; Barbuda">Antigua &amp; Barbuda</Option>
+                                                        <Option value="Argentina">Argentina</Option>
+                                                        <Option value="Armenia">Armenia</Option>
+                                                        <Option value="Aruba">Aruba</Option>
+                                                        <Option value="Australia">Australia</Option>
+                                                        <Option value="Austria">Austria</Option>
+                                                        <Option value="Azerbaijan">Azerbaijan</Option>
+                                                        <Option value="Bahamas">Bahamas</Option>
+                                                        <Option value="Bahrain">Bahrain</Option>
+                                                        <Option value="Bangladesh">Bangladesh</Option>
+                                                        <Option value="Barbados">Barbados</Option>
+                                                        <Option value="Belarus">Belarus</Option>
+                                                        <Option value="Belgium">Belgium</Option>
+                                                        <Option value="Belize">Belize</Option>
+                                                        <Option value="Benin">Benin</Option>
+                                                        <Option value="Bermuda">Bermuda</Option>
+                                                        <Option value="Bhutan">Bhutan</Option>
+                                                        <Option value="Bolivia">Bolivia</Option>
+                                                        <Option
+                                                            value="Bosnia &amp; Herzegovina">Bosnia &amp; Herzegovina</Option>
+                                                        <Option value="Botswana">Botswana</Option>
+                                                        <Option value="Bouvet Island">Bouvet Island</Option>
+                                                        <Option value="Brazil">Brazil</Option>
+                                                        <Option value="British Indian Ocean Territory">British Indian
+                                                            Ocean Territory</Option>
+                                                        <Option value="British Virgin Islands">British Virgin
+                                                            Islands</Option>
+                                                        <Option value="Brunei">Brunei</Option>
+                                                        <Option value="Bulgaria">Bulgaria</Option>
+                                                        <Option value="Burkina Faso">Burkina Faso</Option>
+                                                        <Option value="Burundi">Burundi</Option>
+                                                        <Option value="Cambodia">Cambodia</Option>
+                                                        <Option value="Cameroon">Cameroon</Option>
+                                                        <Option value="Canada">Canada</Option>
+                                                        <Option value="Cape Verde">Cape Verde</Option>
+                                                        <Option value="Caribbean Netherlands">Caribbean
+                                                            Netherlands</Option>
+                                                        <Option value="Cayman Islands">Cayman Islands</Option>
+                                                        <Option value="Central African Republic">Central African
+                                                            Republic</Option>
+                                                        <Option value="Chad">Chad</Option>
+                                                        <Option value="Chile">Chile</Option>
+                                                        <Option value="China">China</Option>
+                                                        <Option value="Christmas Island">Christmas Island</Option>
+                                                        <Option value="Cocos (Keeling) Islands">Cocos (Keeling)
+                                                            Islands</Option>
+                                                        <Option value="Colombia">Colombia</Option>
+                                                        <Option value="Comoros">Comoros</Option>
+                                                        <Option value="Congo - Brazzaville">Congo - Brazzaville</Option>
+                                                        <Option value="Congo - Kinshasa">Congo - Kinshasa</Option>
+                                                        <Option value="Cook Islands">Cook Islands</Option>
+                                                        <Option value="Costa Rica">Costa Rica</Option>
+                                                        <Option value="Côte d’Ivoire">Côte d’Ivoire</Option>
+                                                        <Option value="Croatia">Croatia</Option>
+                                                        <Option value="Cuba">Cuba</Option>
+                                                        <Option value="Curaçao">Curaçao</Option>
+                                                        <Option value="Cyprus">Cyprus</Option>
+                                                        <Option value="Czechia">Czechia</Option>
+                                                        <Option value="Denmark">Denmark</Option>
+                                                        <Option value="Djibouti">Djibouti</Option>
+                                                        <Option value="Dominica">Dominica</Option>
+                                                        <Option value="Dominican Republic">Dominican Republic</Option>
+                                                        <Option value="Ecuador">Ecuador</Option>
+                                                        <Option value="Egypt">Egypt</Option>
+                                                        <Option value="El Salvador">El Salvador</Option>
+                                                        <Option value="Equatorial Guinea">Equatorial Guinea</Option>
+                                                        <Option value="Eritrea">Eritrea</Option>
+                                                        <Option value="Estonia">Estonia</Option>
+                                                        <Option value="Eswatini">Eswatini</Option>
+                                                        <Option value="Ethiopia">Ethiopia</Option>
+                                                        <Option value="Falkland Islands">Falkland Islands</Option>
+                                                        <Option value="Faroe Islands">Faroe Islands</Option>
+                                                        <Option value="Fiji">Fiji</Option>
+                                                        <Option value="Finland">Finland</Option>
+                                                        <Option value="France">France</Option>
+                                                        <Option value="French Guiana">French Guiana</Option>
+                                                        <Option value="French Polynesia">French Polynesia</Option>
+                                                        <Option value="French Southern Territories">French Southern
+                                                            Territories</Option>
+                                                        <Option value="Gabon">Gabon</Option>
+                                                        <Option value="Gambia">Gambia</Option>
+                                                        <Option value="Georgia">Georgia</Option>
+                                                        <Option value="Germany">Germany</Option>
+                                                        <Option value="Ghana">Ghana</Option>
+                                                        <Option value="Gibraltar">Gibraltar</Option>
+                                                        <Option value="Greece">Greece</Option>
+                                                        <Option value="Greenland">Greenland</Option>
+                                                        <Option value="Grenada">Grenada</Option>
+                                                        <Option value="Guadeloupe">Guadeloupe</Option>
+                                                        <Option value="Guam">Guam</Option>
+                                                        <Option value="Guatemala">Guatemala</Option>
+                                                        <Option value="Guernsey">Guernsey</Option>
+                                                        <Option value="Guinea">Guinea</Option>
+                                                        <Option value="Guinea-Bissau">Guinea-Bissau</Option>
+                                                        <Option value="Guyana">Guyana</Option>
+                                                        <Option value="Haiti">Haiti</Option>
+                                                        <Option
+                                                            value="Heard &amp; McDonald Islands">Heard &amp; McDonald
+                                                            Islands</Option>
+                                                        <Option value="Honduras">Honduras</Option>
+                                                        <Option value="Hong Kong SAR China">Hong Kong SAR China</Option>
+                                                        <Option value="Hungary">Hungary</Option>
+                                                        <Option value="Iceland">Iceland</Option>
+                                                        <Option value="India">India</Option>
+                                                        <Option value="Indonesia">Indonesia</Option>
+                                                        <Option value="Iran">Iran</Option>
+                                                        <Option value="Iraq">Iraq</Option>
+                                                        <Option value="Ireland">Ireland</Option>
+                                                        <Option value="Isle of Man">Isle of Man</Option>
+                                                        <Option value="Israel">Israel</Option>
+                                                        <Option value="Italy">Italy</Option>
+                                                        <Option value="Jamaica">Jamaica</Option>
+                                                        <Option value="Japan">Japan</Option>
+                                                        <Option value="Jersey">Jersey</Option>
+                                                        <Option value="Jordan">Jordan</Option>
+                                                        <Option value="Kazakhstan">Kazakhstan</Option>
+                                                        <Option value="Kenya">Kenya</Option>
+                                                        <Option value="Kiribati">Kiribati</Option>
+                                                        <Option value="Kuwait">Kuwait</Option>
+                                                        <Option value="Kyrgyzstan">Kyrgyzstan</Option>
+                                                        <Option value="Laos">Laos</Option>
+                                                        <Option value="Latvia">Latvia</Option>
+                                                        <Option value="Lebanon">Lebanon</Option>
+                                                        <Option value="Lesotho">Lesotho</Option>
+                                                        <Option value="Liberia">Liberia</Option>
+                                                        <Option value="Libya">Libya</Option>
+                                                        <Option value="Liechtenstein">Liechtenstein</Option>
+                                                        <Option value="Lithuania">Lithuania</Option>
+                                                        <Option value="Luxembourg">Luxembourg</Option>
+                                                        <Option value="Macao SAR China">Macao SAR China</Option>
+                                                        <Option value="Madagascar">Madagascar</Option>
+                                                        <Option value="Malawi">Malawi</Option>
+                                                        <Option value="Malaysia">Malaysia</Option>
+                                                        <Option value="Maldives">Maldives</Option>
+                                                        <Option value="Mali">Mali</Option>
+                                                        <Option value="Malta">Malta</Option>
+                                                        <Option value="Marshall Islands">Marshall Islands</Option>
+                                                        <Option value="Martinique">Martinique</Option>
+                                                        <Option value="Mauritania">Mauritania</Option>
+                                                        <Option value="Mauritius">Mauritius</Option>
+                                                        <Option value="Mayotte">Mayotte</Option>
+                                                        <Option value="Mexico">Mexico</Option>
+                                                        <Option value="Micronesia">Micronesia</Option>
+                                                        <Option value="Moldova">Moldova</Option>
+                                                        <Option value="Monaco">Monaco</Option>
+                                                        <Option value="Mongolia">Mongolia</Option>
+                                                        <Option value="Montenegro">Montenegro</Option>
+                                                        <Option value="Montserrat">Montserrat</Option>
+                                                        <Option value="Morocco">Morocco</Option>
+                                                        <Option value="Mozambique">Mozambique</Option>
+                                                        <Option value="Myanmar (Burma)">Myanmar (Burma)</Option>
+                                                        <Option value="Namibia">Namibia</Option>
+                                                        <Option value="Nauru">Nauru</Option>
+                                                        <Option value="Nepal">Nepal</Option>
+                                                        <Option value="Netherlands">Netherlands</Option>
+                                                        <Option value="New Caledonia">New Caledonia</Option>
+                                                        <Option value="New Zealand">New Zealand</Option>
+                                                        <Option value="Nicaragua">Nicaragua</Option>
+                                                        <Option value="Niger">Niger</Option>
+                                                        <Option value="Nigeria">Nigeria</Option>
+                                                        <Option value="Niue">Niue</Option>
+                                                        <Option value="Norfolk Island">Norfolk Island</Option>
+                                                        <Option value="North Korea">North Korea</Option>
+                                                        <Option value="North Macedonia">North Macedonia</Option>
+                                                        <Option value="Northern Mariana Islands">Northern Mariana
+                                                            Islands</Option>
+                                                        <Option value="Norway">Norway</Option>
+                                                        <Option value="Oman">Oman</Option>
+                                                        <Option value="Pakistan">Pakistan</Option>
+                                                        <Option value="Palau">Palau</Option>
+                                                        <Option value="Palestinian Territories">Palestinian
+                                                            Territories</Option>
+                                                        <Option value="Panama">Panama</Option>
+                                                        <Option value="Papua New Guinea">Papua New Guinea</Option>
+                                                        <Option value="Paraguay">Paraguay</Option>
+                                                        <Option value="Peru">Peru</Option>
+                                                        <Option value="Philippines">Philippines</Option>
+                                                        <Option value="Pitcairn Islands">Pitcairn Islands</Option>
+                                                        <Option value="Poland">Poland</Option>
+                                                        <Option value="Portugal">Portugal</Option>
+                                                        <Option value="Puerto Rico">Puerto Rico</Option>
+                                                        <Option value="Qatar">Qatar</Option>
+                                                        <Option value="Réunion">Réunion</Option>
+                                                        <Option value="Romania">Romania</Option>
+                                                        <Option value="Russia">Russia</Option>
+                                                        <Option value="Rwanda">Rwanda</Option>
+                                                        <Option value="Samoa">Samoa</Option>
+                                                        <Option value="San Marino">San Marino</Option>
+                                                        <Option value="São Tomé &amp; Príncipe">São
+                                                            Tomé &amp; Príncipe</Option>
+                                                        <Option value="Saudi Arabia">Saudi Arabia</Option>
+                                                        <Option value="Senegal">Senegal</Option>
+                                                        <Option value="Serbia">Serbia</Option>
+                                                        <Option value="Seychelles">Seychelles</Option>
+                                                        <Option value="Sierra Leone">Sierra Leone</Option>
+                                                        <Option value="Singapore">Singapore</Option>
+                                                        <Option value="Sint Maarten">Sint Maarten</Option>
+                                                        <Option value="Slovakia">Slovakia</Option>
+                                                        <Option value="Slovenia">Slovenia</Option>
+                                                        <Option value="Solomon Islands">Solomon Islands</Option>
+                                                        <Option value="Somalia">Somalia</Option>
+                                                        <Option value="South Africa">South Africa</Option>
+                                                        <Option value="South Georgia &amp; South Sandwich Islands">South
+                                                            Georgia &amp; South Sandwich Islands</Option>
+                                                        <Option value="South Korea">South Korea</Option>
+                                                        <Option value="South Sudan">South Sudan</Option>
+                                                        <Option value="Spain">Spain</Option>
+                                                        <Option value="Sri Lanka">Sri Lanka</Option>
+                                                        <Option value="St. Barthélemy">St. Barthélemy</Option>
+                                                        <Option value="St. Helena">St. Helena</Option>
+                                                        <Option value="St. Kitts &amp; Nevis">St.
+                                                            Kitts &amp; Nevis</Option>
+                                                        <Option value="St. Lucia">St. Lucia</Option>
+                                                        <Option value="St. Martin">St. Martin</Option>
+                                                        <Option value="St. Pierre &amp; Miquelon">St.
+                                                            Pierre &amp; Miquelon</Option>
+                                                        <Option value="St. Vincent &amp; Grenadines">St.
+                                                            Vincent &amp; Grenadines</Option>
+                                                        <Option value="Sudan">Sudan</Option>
+                                                        <Option value="Suriname">Suriname</Option>
+                                                        <Option value="Svalbard &amp; Jan Mayen">Svalbard &amp; Jan
+                                                            Mayen</Option>
+                                                        <Option value="Sweden">Sweden</Option>
+                                                        <Option value="Switzerland">Switzerland</Option>
+                                                        <Option value="Syria">Syria</Option>
+                                                        <Option value="Taiwan">Taiwan</Option>
+                                                        <Option value="Tajikistan">Tajikistan</Option>
+                                                        <Option value="Tanzania">Tanzania</Option>
+                                                        <Option value="Thailand">Thailand</Option>
+                                                        <Option value="Timor-Leste">Timor-Leste</Option>
+                                                        <Option value="Togo">Togo</Option>
+                                                        <Option value="Tokelau">Tokelau</Option>
+                                                        <Option value="Tonga">Tonga</Option>
+                                                        <Option
+                                                            value="Trinidad &amp; Tobago">Trinidad &amp; Tobago</Option>
+                                                        <Option value="Tunisia">Tunisia</Option>
+                                                        <Option value="Turkey">Turkey</Option>
+                                                        <Option value="Turkmenistan">Turkmenistan</Option>
+                                                        <Option value="Turks &amp; Caicos Islands">Turks &amp; Caicos
+                                                            Islands</Option>
+                                                        <Option value="Tuvalu">Tuvalu</Option>
+                                                        <Option value="U.S. Outlying Islands">U.S. Outlying
+                                                            Islands</Option>
+                                                        <Option value="U.S. Virgin Islands">U.S. Virgin Islands</Option>
+                                                        <Option value="Uganda">Uganda</Option>
+                                                        <Option value="Ukraine">Ukraine</Option>
+                                                        <Option value="United Arab Emirates">United Arab
+                                                            Emirates</Option>
+                                                        <Option value="United Kingdom">United Kingdom</Option>
+                                                        <Option value="United States" selected="">United States</Option>
+                                                        <Option value="Uruguay">Uruguay</Option>
+                                                        <Option value="Uzbekistan">Uzbekistan</Option>
+                                                        <Option value="Vanuatu">Vanuatu</Option>
+                                                        <Option value="Vatican City">Vatican City</Option>
+                                                        <Option value="Venezuela">Venezuela</Option>
+                                                        <Option value="Vietnam">Vietnam</Option>
+                                                        <Option value="Wallis &amp; Futuna">Wallis &amp; Futuna</Option>
+                                                        <Option value="Western Sahara">Western Sahara</Option>
+                                                        <Option value="Yemen">Yemen</Option>
+                                                        <Option value="Zambia">Zambia</Option>
+                                                        <Option value="Zimbabwe">Zimbabwe</Option>
+                                                    </antd.Select>
+                                                </antd.Form.Item>
+                                            </div>
+                                        </div>
+                                        <antd.Form.Item
+                                            name="Textarea"
+                                            rules={[{required: true, message: 'Please input your textarea!'}]}
+                                        >
+                                            <TextArea placeholder="Enter your feedback here"
+                                                      autoSize={{minRows: 6, maxRows: 6}}/>
+                                        </antd.Form.Item>
+
+                                        <antd.Upload
+                                            action="https://aprci.atomee.com/apr/emailUploadFile"
+                                            listType="picture-card"
+                                            fileList={this.state.fileList}
+                                            onPreview={this.handlePreview}
+                                            onChange={this.handleChange}
+                                            listType='picture-card'
+                                            multiple={true}
+                                        >
+                                            {this.state.fileList.length >= 6 ? null :
+                                                <img src="https://aprci.atomee.com/img/add-picture.png"/>}
+                                        </antd.Upload>
+                                        <antd.Modal
+                                            visible={previewVisible}
+                                            title={previewTitle}
+                                            footer={null}
+                                            onCancel={this.handleCancel}
+                                        >
+                                            {/* 判断type，如果为video则调用video标签 */}
+                                            {this.state.fileType == null ? (
+                                                <img
+                                                    alt='example'
+                                                    style={{ width: '100%' }}
+                                                    src={previewImage}
+                                                />
+                                            ) : (
+                                                <video width='100%' height='240' controls>
+                                                    <source type='video/mp4' src={previewImage} />
+                                                </video>
+                                            )}
+                                        </antd.Modal>    
+                                        <p style={{ textAlign: 'left', color: 'red' }}>{this.state.limit}</p>
+                                        <div style={{display: 'flex', justifyContent: 'center'}}>
+                                            <antd.Form.Item
+                                            >
+                                                <antd.Button loading={this.state.loading} disabled={this.state.disabled} htmlType="submit" type="primary">Submit</antd.Button>
+                                            </antd.Form.Item>
+                                        </div>
+                                    </antd.Form>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<Comments/>,
+        document.getElementById('app'),
+    )
+</script>
+</body>
+</html>

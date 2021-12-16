@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform</title>
+    <style>
+        #container{
+            opacity: 1;
+        }
+    </style>
+    <script src="./transform.js"></script>
+</head>
+<body>
+    <div style="width: 1920px;height:1100px;margin-bottom: -300px;">
+        <img style="width:100%" id="container" src="./img/img.png" alt="暂无图片信息">
+    </div>
+    <div id="content" style="text-align: center;width: 920px;height:500px;margin: 0 auto;opacity: 0;">
+        <h1>A Healthier Way to Fry</h1>
+        <p>With Okaysou Dance430 Air Fryer, you can easily make your favorite fried foods with the same crispy, delicious flavor using little to no oil. All removable parts are dishwasher safe and basket has a non-stick coating for easy cleaning. An included 2-year warranty helps maintain peace of mind.</p>
+    </div>
+    <script>
+        var a = document.body.scrollHeight;
+        window.addEventListener('scroll',function(event){
+            let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            let value = (scrollTop/(a/2)).toFixed(5)
+            let container = document.getElementById('container')
+            let content = document.getElementById('content')
+            container.style.opacity = 1-value
+            if(container.style.opacity>0){
+                fnRotationAndScale(container,0,1-value,-3000*value)
+                if(container.style.opacity<0.6){
+                    content.style.opacity = value*0.8
+                    if(container.style.opacity<0.3){
+                        container.style.opacity = 0
+                    }
+                    if(content.style.opacity>1){
+                        content.style.opacity=1
+                    }
+                }else{
+                    content.style.opacity = 0
+                }
+            }
+        })
+        
+        
+    </script>
+</body>
+</html>

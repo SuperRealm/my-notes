@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>animation</title>
+    <style>
+        /* @keyframes leftImage {
+            0% {opacity: 0;bottom: calc(-15.625vw);}
+        
+            100% {opacity: 1;bottom: calc(0vw);}
+        }
+        @-webkit-keyframes leftImage {
+            0% {opacity: 0;bottom: calc(-15.625vw);}
+        
+            100% {opacity: 1;bottom: calc(0vw);}
+        } */
+        *, :after, :before {
+            box-sizing: border-box!important;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        .section2 .picture1 {
+            position: absolute;
+            left: 0;
+            width: calc(635*100vw/1920);
+            height: calc(1235*100vw/1920);
+            /* animation: leftImage 20s linear infinite; */
+        }
+        .picture1:hover{
+            animation-play-state:paused;
+        }
+        .section2 img {
+            width: 100%;
+        }
+        .section2-mobile .text-content {
+            margin: 0 calc(78*100vw/750) 0 calc(48*100vw/750);
+            font-family: 'Roboto';
+            text-align: left;
+            color: #000;
+        }
+        .section2-mobile .text-content .title {
+            padding-top: calc(190*100vw/750);
+            color: rgba(0, 0, 0, .5);
+            font-size: calc(42*100vw/750);
+            line-height: calc(49*100vw/750);
+            font-weight: 500;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-style: none;
+            vertical-align: top;
+        }
+        .section2 .text-content {
+            position: absolute;
+            width: 100vw;
+            font-family: 'Roboto';
+            color: #000;
+            opacity: 0;
+        }
+        .section2 .text-content .title {
+            margin: 0 auto;
+            text-align: left;
+            width: calc(496*100vw/1920);
+            left: 0;
+            right: 0;
+            color: rgba(0, 0, 0, .5);
+            font-size: calc(36*100vw/1920);
+            line-height: calc(42*100vw/1920);
+        }
+        .section2 .text-content .desc1 {
+            margin: 0 auto;
+            text-align: left;
+            width: calc(496*100vw/1920);
+            font-size: calc(80*100vw/1920);
+            line-height: calc(80*100vw/1920);
+            font-weight: 500;
+            letter-spacing: -2px;
+        }
+        .section2-mobile .text-content .desc1 {
+            margin: calc(5*100vw/750) 0 calc(61*100vw/750);
+            font-size: calc(80*100vw/750);
+            font-weight: 500;
+            line-height: 44px;
+        }
+        .section2 .text-content .desc2 {
+            margin: 0 auto;
+            text-align: left;
+            width: calc(496*100vw/1920);
+            font-size: calc(26*100vw/1920);
+            color: rgba(0, 0, 0, .6);
+            line-height: calc(34*100vw/1920);
+            white-space: nowrap;
+        }
+        .section2-mobile .text-content .desc2 {
+            margin-bottom: calc(100*100vw/750);
+            font-size: calc(42*100vw/750);
+            line-height: calc(49*100vw/750);
+            white-space: nowrap;
+        }
+        .section2-mobile .text-content .desc3 {
+            margin: calc(50*100vw/750) auto calc(14*100vw/750);
+            text-align: left;
+            font-size: calc(15*100vw/750);
+            color: #000;
+            line-height: calc(28*100vw/750);
+        }
+        .section2 .text-content .desc3 {
+            margin: calc(50*100vw/1920) auto calc(14*100vw/1920);
+            text-align: left;
+            width: calc(510*100vw/1920);
+            font-size: calc(24*100vw/1920);
+            color: #000;
+            line-height: calc(28*100vw/1920);
+        }
+        .section2 .text-content .desc3 span {
+            font-size: calc(36*100vw/1920);
+            line-height: calc(42*100vw/1920);
+        }
+        .section2-mobile .text-content .desc3 span {
+            font-size: calc(36*100vw/750);
+            line-height: calc(42*100vw/750);
+        }
+        .section2 .text-content .button {
+            margin: 0 auto;
+            text-align: left;
+            width: calc(510*100vw/1920);
+            font-size: calc(22*100vw/1920);
+            color: rgba(0, 0, 0, .6);
+        }
+        .section2-mobile .text-content .button {
+            margin: 0 auto;
+            text-align: left;
+            color: rgba(0, 0, 0, .6);
+        }
+        .section2-mobile .text-content .button a {
+            display: inline-block;
+            width: calc(146*100vw/750);
+            height: calc(48*100vw/750);
+            line-height: calc(48*100vw/750);
+            font-size: calc(24*100vw/750);
+            font-weight: 500;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 35px;
+            background-color: #000;
+        }
+        .section2 .text-content .button a {
+            display: inline-block;
+            width: calc(136*100vw/1920);
+            height: calc(40*100vw/1920);
+            line-height: calc(40*100vw/1920);
+            font-size: calc(22*100vw/1920);
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 30px;
+            background-color: #000;
+            vertical-align: middle;
+        }
+        .section2 .picture2 {
+            position: absolute;
+            right: 0;
+            width: calc(585*100vw/1920);
+            height: calc(1002*100vw/1920);
+            opacity: 0;
+        }
+        .section2 img {
+            width: 100%;
+        }
+        .section2 {
+            min-height: calc(1280*100vw/1920);
+        }
+
+    </style>
+</head>
+<body>
+    <div class="section-items section2" style="height: 3350px;">
+        <div id="sections" class="content content2" style="height: 1280px; position: fixed; top: 0px; left: 0px; width: 1903px;">
+  
+      <div id="picture1" class="picture1 skrollable skrollable-between" data-_top4--2000="bottom:calc(-300*100vw/1920);opacity:0;" data-_top4--900="bottom:calc(0*100vw/1920);opacity:1;" style="bottom: calc(-15.625vw); opacity: 0;">
+        <img class="lazyload" src="https://i.shgcdn.com/b2846f30-87a3-4f92-a677-9cdf082d018b/-/format/auto/-/preview/3000x3000/-/quality/lighter/" alt="Smartmi Air Purifier P1" title="Smartmi Air Purifier P1">
+      </div>
+      <div id="desc1" class="text-content skrollable skrollable-before" data-_top4--100="position:absolute;bottom:calc(690*100vw/1920);opacity:0;" data-_top4-200="bottom:calc(920*100vw/1920);opacity:1;" style="position: absolute; bottom: calc(35.9375vw); opacity: 0;">
+        <div class="title">Smartmi Air Purifier P1</div>
+      </div>
+      <div id="desc2" class="text-content skrollable skrollable-before" data-_top4-200="position:absolute;bottom:calc(440*100vw/1920);opacity:0;" data-_top4-500="bottom:calc(590*100vw/1920);opacity:1;" style="position: absolute; bottom: calc(22.9167vw); opacity: 0;">
+        <div class="desc1">
+          Deep<br>
+          Consideration,<br>
+          Powerful <br>
+          Purification.
+        </div>
+      </div>
+      <div id="desc3" class="text-content skrollable skrollable-before" data-_top4-500="position:absolute;bottom:calc(0*100vw/1920);opacity:0;" data-_top4_end="bottom:calc(160*100vw/1920);opacity:1;" style="position: absolute; bottom: calc(0vw); opacity: 0;">
+        <div class="desc2">
+          Intelligently combines filtration and<br>
+          monitoring; Dual-purpose laser particle<br>
+          sensor monitors indoor air quality; True HEPA filter<br>
+          removes 99.98% of particles down to 80<br>
+          nm*; Supports three major smart home<br>
+          systems; Thoroughly purifies your<br>
+          bedroom’s air in 6.5 minutes*.
+        </div>
+        <div class="desc3">$<span>179.99</span></div>
+        <div class="button">
+          <a href="https://www.amazon.com/gp/product/B08TQGWW6R?maas=maas_adg_1222987563B916886744F75E60150D3C_afap_abs&amp;ref_=aa_maas" target="_blank">Buy now</a>
+        </div>
+      </div>
+      <div id="picture2" class="picture2 skrollable skrollable-between" data-_top4--1300="bottom:calc(-300*100vw/1920);opacity:0;" data-_top4--100="bottom:calc(0*100vw/1920);opacity:1;" style="bottom: calc(-15.625vw); opacity: 0;">
+        <img class="lazyload" src="https://i.shgcdn.com/88cde77d-118a-4c9a-a023-f28c54eafb51/-/format/auto/-/preview/3000x3000/-/quality/lighter/" alt="Smartmi Air Purifier P1" title="Smartmi Air Purifier P1">
+      </div>
+  
+    </div>
+  </div>
+  <script>
+      var a = document.body.scrollHeight;
+      window.addEventListener('scroll',function(event){
+        let scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+        const s = document.getElementById('sections')
+        const picture1 = document.getElementById('picture1')
+        const picture2 = document.getElementById('picture2')
+        const desc1 = document.getElementById('desc1')
+        const desc2 = document.getElementById('desc2')
+        const desc3 = document.getElementById('desc3')
+
+        let picture1Bottom = -15.625
+        let picture2Bottom = -15.625
+        let text1Bottom = 35.9375 //47.9167
+        let text2Bottom = 22.9167 //30.7292
+        let text3Bottom = 0 //8.3333
+        let picture1opacity = 0
+        let picture2opacity = 0
+        let text1Opac = 0
+        let text2Opac = 0
+        let text3Opac = 0
+
+        s.style.position = "relative";
+        s.style.top = "0"
+
+        function scroll(value){
+            s.style.position = "fixed";
+            s.style.top = "70px";
+            picture1Bottom = -15.625+value*10
+            picture1opacity = value/2+0.3
+            if(picture1Bottom>0){
+                picture1Bottom = 0
+                picture1opacity = 1
+            }
+            if(picture1Bottom>-6.4){
+                picture2Bottom = -22.025 + value*10
+                picture2opacity = value - 0.7
+                if(picture2Bottom > 0){
+                    picture2Bottom = 0
+                    picture2opacity = 1
+                    text1Bottom = 35.9375 + value*2
+                    text1Opac = value*2
+                    if(text1Bottom>47.9167){
+                        text1Bottom = 47.9167
+                        text1Opac = 1
+                        text2Bottom = 22.9167 + value*2
+                        text2Opac = value*2
+                        if(text2Bottom>30.7292){
+                            text2Bottom = 30.7292
+                            text2Opac = 1
+                            text3Bottom = value*3
+                            text3Opac = value*3
+                            if(text3Bottom>8.3333){
+                                text3Bottom = 8.3333
+                                text3Opac = 1
+                                s.style.position = "relative";
+                                s.style.top = "2070px";
+                            }
+                        }
+                    }
+                    // s.style.position = "relative";
+                    // s.style.top = "2070px"
+                }
+            }
+            // return picture1Bottom,picture1opacity,picture2Bottom,picture2opacity;
+        }
+        if(scrollTop){
+            let value = (scrollTop/(a/2)).toFixed(5)
+            scroll(value)
+            // console.log(value,'value')
+            // console.log('sc:',scrollTop,'a:',a,'a/2',a/2)
+            // console.log(picture2Bottom,picture2opacity)
+            picture1.style.bottom = "calc(" + picture1Bottom + 'vw)';
+            picture1.style.opacity = picture1opacity;
+            picture2.style.bottom ="calc(" + picture2Bottom + 'vw)';
+            picture2.style.opacity = picture2opacity;
+            desc1.style.bottom ="calc(" + text1Bottom + 'vw)';
+            desc1.style.opacity = text1Opac;
+            desc2.style.bottom ="calc(" + text2Bottom + 'vw)';
+            desc2.style.opacity = text2Opac;
+            desc3.style.bottom ="calc(" + text3Bottom + 'vw)';
+            desc3.style.opacity = text3Opac;
+        }
+      })
+  </script>
+</body>
+</html>

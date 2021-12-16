@@ -1,0 +1,1180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>transform1</title>
+    <style>
+        p,div{
+            box-sizing:border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box; /* Safari */
+        }
+
+        body,ul,li,dl,dt,dd,p,ol,form,img,table,fieldset,legend{
+            margin:0; 
+            padding:0;
+        }
+        ul,li,ol{list-style:none;}
+        img,fieldset{border:0; }
+        img{
+            display:block;
+        }
+        a{
+            text-decoration:none; 
+            color:#333;
+        }
+        body{
+            width:100%;
+            height:100vh;
+            overflow-x: hidden;
+            font-size:12px; 
+            font-family:"微软雅黑";
+            scroll-behavior:smooth;
+            box-sizing:border-box;
+            -moz-box-sizing:border-box; /* Firefox */
+            -webkit-box-sizing:border-box; /* Safari */
+        }
+        input,a{
+            outline:none;
+        }
+
+        @media only screen and (max-width:589px){
+            .content-p{
+                width:42vw;
+                word-break: break-word;
+                margin:0 auto;
+                font-size: 30px;
+                font-family: Aileron;
+                font-weight: bold;
+                line-height: 35px;
+                color: #000000;
+                opacity: 1;
+            }
+        }
+        @media only screen and (min-width:590px){
+            .content-p{
+                width:42vw;
+                word-break: break-word;
+                margin:0 auto;
+                font-size: 30px;
+                font-family: Aileron;
+                font-weight: bold;
+                line-height: 35px;
+                color: #000000;
+                opacity: 1;
+            }
+        }
+        .air-fryer{
+            
+        }
+        #container{
+            opacity: 1;
+            width: 100%;
+            /* margin-bottom: -30vh; */
+        }
+        #content{
+            text-align: center;
+            /* margin-top: -80vh; */
+            /* opacity: 0; */
+        }
+        .text-align-center{
+            text-align: center;
+        }
+        .content-module1{
+            box-sizing: border-box;
+            margin:-30vh 0 30vh;
+        }
+        .content-h1{
+            /* width: 1000px; */
+            /* width:100%; */
+            height: 70px;
+            line-height: 70px;
+            background: #FFFFFF;
+            opacity: 1;
+            border-radius: 0px;
+            font-size: 6vw;
+        }
+        
+        .content-buy{
+            /* height: 60px; */
+            display: flex;
+            justify-content: space-around;
+            width: 20vw;
+            margin: 30px auto;
+            /* align-items: center; */
+        }
+        .content-span{
+            font-size: 36px;
+            font-family: Aileron;
+            font-weight: bold;
+            line-height: 33px;
+            color: #000000;
+            opacity: 1;
+        }
+        .content-module2{
+            background:url('./img/background.png') no-repeat;
+            width:100%;
+            min-height: 100vh;
+        }
+        .content-module2-part1{
+            display: flex;
+            justify-content: end;
+        }
+        .module2-part1-left{
+            margin-top: 40vh;
+            text-align: left;
+        }
+        .large-font-orange{
+            color: orange !important;
+        }
+        .large-font-black{
+            font-size: 70px;
+            font-family: Aileron;
+            font-weight: bold;
+            line-height: 70px;
+            color: #000000;
+            opacity: 1;
+            font-size: 3vw;
+            margin:20px 0;
+        }
+        .large-font-white{
+            color: white !important;
+        }
+        .large-font-grey{
+            color: grey !important;
+        }
+        .module2-left-word{
+            width:22vw;
+            font-size: 20px;
+            font-family: Aileron;
+            font-weight: bold;
+            line-height: 25px;
+            color: #6B6B6B;
+            /* letter-spacing: 10px; */
+            opacity: 1;
+        }
+        .module2-left-word>p:nth-child(1){
+            color: black !important;;
+        }
+        .button-group-one{
+            margin:5vh 0;
+            display: flex;
+            justify-content:space-between;
+            align-items:flex-start;
+        }
+        .content-module2-part2{
+            display: flex;
+            justify-content:space-evenly;
+            align-items: center;
+        }
+        .module2-part2-left{
+            position: relative;
+            width:45vw;
+            height:100vh;
+        }
+        .part2-left-first-image{
+            position:absolute;
+            right:0;
+            top: 0;
+        }
+        .part2-left-second-image{
+            position:absolute;
+            left: 0;
+            top: 10vh;
+        }
+        .part2-left-third-image{
+            position:absolute;
+            right:0;
+            bottom:5vh;
+        }
+        .part2-left-four-image{
+            position:absolute;
+            bottom:0;
+            left:0;
+        }
+        .part2-right-col{
+            display: flex;
+            justify-content:space-between;
+            margin:5vh 0;
+        }
+        .module2-part2-right{
+            text-align: left;
+            margin-right: 10vw;
+        }
+        .content-module2-part3{
+            background-color: #1b1b1b;
+            width:100%;
+            min-height: 1080px;
+            margin-top: 140vh;
+            display:flex;
+            justify-content: flex-start;
+            align-items: center;
+            text-align: left;
+        }
+        .module2-part3-left{
+            height:120vh;
+            background:url('./img/groupThree/air-fryer.png');
+            width:64vw;
+            margin: -4vh 0 0 -4vw;
+        }
+        .module2-part3-right{
+            /* margin-left: 4vw; */
+        }
+        .module2-part3-right>div>img{
+            width:26vw;
+        }
+        .module2-part3-right>p{
+            padding:0 2vw;
+        }
+        .module2-part3-right>p:nth-child(3){
+            width: 26vw;
+            font-size: 1vw;
+            font-family: Aileron;
+            font-weight: bold;
+            color: #FFFFFF;
+            opacity: 1;
+            margin:5vh 0;
+        }
+        .content-module2-part4{
+            width:100%;
+            min-height: 1080px;
+            background-color: black;
+            padding:20vh 12.5vw;
+        }
+        .module2-part4-first{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .first-right-group{
+            width:80%;
+        }
+        .first-right-group>div{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height:10vh;
+        }
+        .part4-first-right{
+            text-align:left;
+            margin:0 auto;
+        }
+        .content-module3{
+            padding:0 12vw;
+            /* margin: 10vh 12vw; */
+            width:100%;
+            height: 100vh;
+            min-height: 10vh;
+        }
+        .module3-part1-top{
+            padding:10vh 0;
+        }
+        .module3-part2-top{
+            /* padding:10vh 0; */
+        }
+        .module3-part1-top-img{
+            display:flex;
+            justify-content: space-between;
+            margin:10vh 0;
+        }
+        .module3-part2-top-img{
+            display: flex;
+            justify-content: space-between;
+            align-items:baseline;
+            margin:10vh 0;
+        }
+        .content-module4{
+            background-color: black;
+            width:100%;
+            padding:10vh 20vw;
+            height:160vh;
+            min-height: 100vh;
+        }
+        .module3-part2-top-img>div>p{
+            margin: 5vh 0;
+        }
+        .content-module4-top{
+            width:60vw;
+            margin: 0 auto 10vh;
+            font-size: 1vw;
+        }
+        .content-module4-top>div{
+            display: flex;
+            justify-content: space-between;
+            color:white;
+            border-bottom: 1px solid white;
+            margin:3vh 0;
+        }
+        .content-module4-top>div>p:nth-child(2){
+            margin:0 10vw 0 0;
+            width:10vw;
+            text-align:left;
+            font-size: 1vw;
+        }
+        .content-module4-bottom{
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+        }
+        .content-module4-bottom>div>p{
+            color:white;
+            font-size: 1vw;
+            margin:5vh 0;
+        }
+        .content-module5{
+            width:100%;
+            /* padding:10vh 20vw; */
+            height:100vh;
+            min-height: 100vh;
+            background-color: #fff;
+        }
+        .content-module5-img-oldMan{
+            background:url('./img/groupSix/oldMan.png') no-repeat;
+            width:100%;
+            min-height: 80vh;
+        }
+        .module5-recommended{
+            margin:10vh 0;
+        }
+        .module5-recommended-purifier{
+            display: flex;
+            justify-content: space-around;
+            padding:0 20vw;
+        }
+        .module5-recommended-purifier>div>img{
+            display:inline-block;
+        }
+        .module5-recommended-purifier>div>p{
+            width:35vw;
+            font-size:1vw;
+            font-family: Aileron;
+            font-weight: bold;
+            height:10vh;
+            /* line-height:3vh; */
+            opacity: 1;
+        }
+        .module5-recommended-purifier>div>span{
+            display:block;
+            margin:5vh 0;
+            font-size: 1vw;
+            font-family: Aileron;
+            font-weight: bold;
+            color: #000000;
+            opacity: 1;
+        }
+
+    </style>
+    <script src="./transform.js"></script>
+</head>
+<body>
+    <h1 class="content-h1 text-align-center">Dance 430</h1>
+    <div class="air-fryer">
+        <div id="content">
+            <!-- 初始加载图 -->
+            <div class="module0">
+                <img id="container" src="./img/img.png" alt="暂无图片信息">
+            </div>
+            <!-- 第一模块 -->
+            <div id="module1" class="content-module1" style="opacity:1;">
+                <h1 class="content-h1">A Healthier Way to <span style="color: orange;">Fry</span></h1>
+                <p class="content-p">With Okaysou Dance430 Air Fryer, you can easily make your favorite fried foods with the same crispy, delicious flavor using little to no oil. All removable parts are dishwasher safe and basket has a non-stick coating for easy cleaning. An included 2-year warranty helps maintain peace of mind.</p>
+                <p class="content-buy">
+                    <span class="content-span">$ 79.97</span>
+                    <a href="javascript:void(0)">
+                        <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                        <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="76px" height="36px" viewBox="0 0 76 36" enable-background="new 0 0 76 36" xml:space="preserve">  <image id="image0" width="76" height="36" x="0" y="0"
+                            href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAkCAMAAAAU7iwuAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+                        AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA2FBMVEX///8An+wAnukAnucA
+                        n+gAn+gAn+cAnukAn+gAn+gAoOgAn+cAn+cAnukAmf8An+cAgP8AnPEAnugAnugAnesAn+gAv/8A
+                        n+gAnucAn+gAn+oAnucAn+cAn+gAnugAn+oAn+gAo+sAn+kAnucAnugAnugAnugAnucAnucAnucA
+                        nucAn+gAn+gAoesAm+kAnugAn+kAnugAnugApvIAn+gAofIAn+gAn+i85vn////p9/34/P/g8/3w
+                        +f7F6fqJ0vRjxPGY2PZHue7Y8PzP7fux4vh4zPOl3fep3MBpAAAAN3RSTlMAKHS40uT2ZtxlQ9nX
+                        RwWXAhLFuyffBMS2mEjVYFjIGP4ZaKCw0PD44NjAeHAmF9NQm8YU2hO9hV4xMgAAAAFiS0dEAIgF
+                        HUgAAAAHdElNRQflCxoSJTFkpgG4AAABsElEQVRIx63WaVPCMBAG4ADlFATk0KICcnmLeC3bg6NF
+                        +v//kQmBITpJ7fV+KB06fSbJts0SIiSVzmjZHARMLqtl0ikiT74QlBFTKEqo0kkUiqVc+UOdVqNS
+                        LNWaaNXP4lgAjfrRarbiWQCt5sFqn8e1AC7ae0yPbwHo3OokYQF0mFW7TAbTGHaVjAVwTbFuUliX
+                        kF5femWOLMY8BNa/IQNQYKZl2YiLENqADFWYxckQmE4yftgSEcBCNll6XPGBrhGX0ntGZOyDOS5u
+                        BAxcNOjZBm35PWMyUWG8Ao6I0TGtAEz8lt8zIbc+BbCQDeWIgU2dLaKjwu781mxloidiC/rvgk1d
+                        mnvVM8uxHcExgx1pCRwD1wrsgYz8sC0bmctOaV3341MtP8CQPP6zZg54iLZlmjvMQ/4rzRN59nud
+                        7A1b67mNtscnS0vJCipN/yXsi+7ytZSlG/YTRBdxqbrGPkE1LbhFZ656LmC6+2y/Bscs11Ne6/BN
+                        YBZq1RTRE9zq3g5bHXmP3Gcc8vEptAeNeNaX0B7QksZqXGa/GheaSjkqNS1JOrRitGYvr+gd47ah
+                        P2CJD17FjBeWAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTExLTI2VDEwOjM3OjQ5KzA4OjAwHMu/
+                        xwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMS0yNlQxMDozNzo0OSswODowMG2WB3sAAAAgdEVY
+                        dHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3Vt
+                        ZW50OjpQYWdlcwAxp/+7LwAAABd0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQAMzYvmTztAAAAFnRF
+                        WHRUaHVtYjo6SW1hZ2U6OldpZHRoADc2s1o5ZAAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdl
+                        L3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjM3ODk0MjY5CwT6CQAAABJ0RVh0VGh1bWI6
+                        OlNpemUAMTMwM0JClMwNxAAAAEZ0RVh0VGh1bWI6OlVSSQBmaWxlOi8vL2FwcC90bXAvaW1hZ2Vs
+                        Yy9pbWd2aWV3Ml85XzE2Mzc4MDg0MTYxNjg3NTkwXzcyX1swXTX/pqgAAAAASUVORK5CYII=" ></image>
+                        </svg>
+                    </a>
+                </p>
+            </div>
+
+            <!-- 第二模块 -->
+            <div id="content-module2" class="content-module2">
+                <div id="content-module2-part1" class="content-module2-part1">
+                    <div id="module2-part1-left" class="module2-part1-left">
+                        <p id="touchScreen" class="large-font-orange  large-font-black">Touch Screen</p>
+                        <p id="touchScreenBtn" class="large-font-black">Button.</p>
+                        <div id="module2LeftWord" class="module2-left-word">
+                            <p>Easy to use, simple to operate.</p>
+                            <p>Touch buttons to select your preferred cooking preset, activate temperature and time modes</p>
+                        </div>
+                        <div id="buttonGroupOne" class="button-group-one">
+                            <img src="./img/groupOne/button-reheat.png" alt="reheat">
+                            <img src="./img/groupOne/button-startAndPause.png" alt="startAndPause">
+                            <img src="./img/groupOne/button-time.png" alt="time">
+                            <img src="./img/groupOne/button-temp.png" alt="temp">
+                        </div>
+                    </div>
+                    <div id="module2-part1-right" class="module2-part1-right">
+                        <img src="./img/air-top.png" alt="">
+                    </div>
+                </div>
+                <div id="content-module2-part2" class="content-module2-part2">
+                    <div id="module2-part2-left" class="module2-part2-left">
+                        <img class="part2-left-first-image" src="./img/groupTwoPartOne/rightOne.png" alt="rightOne">
+                        <img class="part2-left-second-image" src="./img/groupTwoPartOne/leftOne.png" alt="leftOne">
+                        <img class="part2-left-third-image" src="./img/groupTwoPartOne/rightTwo.png" alt="rightTwo">
+                        <img class="part2-left-four-image" src="./img/groupTwoPartOne/leftTwo.png" alt="leftTwo">
+                    </div>
+                    <div id="module2-part2-right" class="module2-part2-right">
+                        <p id="convenient" class="large-font-black">Convenient</p>
+                        <p id="preset" class="large-font-orange  large-font-black">8 Preset.</p>
+                        <div class="module2-left-word">
+                            <span id="default-setting">Use the <b style="color:black;">default settings</b> or change the time and temperature to customize your own cooking process.</span>
+                            <div id="part2-right-col1" class="part2-right-col">
+                                <img src="./img/groupTwoPartTwo/frenchFries.png" alt="frenchFries">
+                                <img src="./img/groupTwoPartTwo/cake.png" alt="cake">
+                                <img src="./img/groupTwoPartTwo/steak.png" alt="steak">
+                                <img src="./img/groupTwoPartTwo/bacon.png" alt="bacon">
+                            </div>
+                            <div id="part2-right-col2" class="part2-right-col">
+                                <img src="./img/groupTwoPartTwo/chicken.png" alt="chicken">
+                                <img src="./img/groupTwoPartTwo/vegetables.png" alt="vegetables">
+                                <img src="./img/groupTwoPartTwo/fish.png" alt="fish">
+                                <img src="./img/groupTwoPartTwo/shrimp.png" alt="shrimp">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+               
+            </div>
+            <div id="content-module2-part3" class="content-module2-part3">
+                <div id="module2Part3Left" class="module2-part3-left"></div>
+                <div class="module2-part3-right">
+                    <p id="hotAir" class="large-font-black large-font-orange">360 °Hot Air</p>
+                    <p id="circulation" class="large-font-black large-font-white">Circulation.</p>
+                    <p id="technology">The heating technology ensures that the food is heated evenly and ripened quickly.</p>
+                    <div id="animationThree">
+                        <img src="./img/groupThree/animationThree.gif" alt="animation">
+                    </div>
+                </div>
+            </div>
+            <div id="contentModule2Part4" class="content-module2-part4">
+                <!-- less oil -->
+                   <div id="module2Part4First" class="module2-part4-first">
+                       <div id="part4FirstLeft" class="part4-first-left">
+                           <img src="./img/groupThree/groupThreePartTwo/firstImg.png" alt="">
+                       </div>
+                       <div class="part4-first-right">
+                           <p id="cookAnyFood" style="font-size: 1vw;" class="large-font-grey">Cook any food to&nbsp;<span class="large-font-white">crispy perfection</span></p>
+                           <p id="inMinutes" class="large-font-white large-font-black">in minutes</p>
+                           <p id="withLessOil" class="large-font-white large-font-black">with&nbsp;<span class="large-font-black large-font-orange">less oil.</span></p>
+                           <div class="first-right-group">
+                               <div id="shrimpAndChick">
+                                   <img src="./img/groupThree//groupThreePartOne/shrimp.png" alt="shrimp">
+                                   <img src="./img/groupThree//groupThreePartOne/chickenWings.png" alt="chickenWings">
+                               </div>
+                               <div id="cakeAndSteak">
+                                   <img src="./img/groupThree//groupThreePartOne/cake.png" alt="cake">
+                                   <img src="./img/groupThree//groupThreePartOne/steak.png" alt="steak">   
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   <!-- Sizable -->
+                   <div class="module2-part4-first" style="margin:14vh 0;">
+                       <div class="part4-first-right" style="width:20vw;">
+                           <p id="A" class="large-font-white large-font-black">A&nbsp;<span class="large-font-black large-font-orange">Sizable</span></p>
+                           <p id="difference" class="large-font-white large-font-black">Difference.</p>
+                           <p id="sacrificing" style="font-size: 1vw;" class="large-font-grey">Our air fryer's square frame saves counter space&nbsp;<span class="large-font-white"> without sacrificing its capacity</span></p>
+                       </div>
+                       <div id="secondImg" class="part4-first-left">
+                           <img src="./img/groupThree/groupThreePartTwo/secondImg.png" alt="secondImg">
+                       </div>
+                   </div>
+                   <!-- Effortless -->
+                   <div class="module2-part4-first">
+                       <div class="part4-first-left">
+                           <img src="./img/groupThree/groupThreePartTwo/thirdImg.png" alt="">
+                       </div>
+                       <div style="width:20vw;" class="part4-first-right">
+                           <p id="effortless" class="large-font-black large-font-orange">Effortless</p>
+                           <p id="cleaning" class="large-font-black large-font-white">Cleaning</p>
+                           <p id="features" style="font-size: 1vw;" class="large-font-grey">Our air fryer <span class="large-font-white">features</span> detachable,<span class="large-font-white">non-stick</span> and <span class="large-font-white">dishwasher-safe basket</span>, saving time and efforts on cleaning.</p>
+                       </div>
+                   </div>
+            </div>
+            <!-- 第三模块 -->
+            <div id="content-module3" class="content-module3">
+                <div class="module3-part1">
+                    <div id="content-module3-part1" class="module3-part1-top">
+                        <p id="autoShutOff" class="large-font-black"><span class="large-font-orange">Auto</span>Shut-off</p>
+                        <p id="safety" class="large-font-grey" style="font-size: 1vw;width:40vw;margin:0 auto;">To ensure safety, the fryer pauses cooking when the basket is removed and automatically shuts off after 3 minutes of inactivity.</p>
+                        <div id="openAndClose" class="module3-part1-top-img">
+                            <img src="./img/groupFour/open.png" alt="open">
+                            <img src="./img/groupFour/close.png" alt="close">
+                        </div>
+                    </div>
+                    <div class="module3-part2-top">
+                        <p id="okaysouExperience" class="large-font-black" style="line-height: 10vh;">Healthy, Tasty, and Creative Cooking Experience Brought by&nbsp;<span class="large-font-orange">Okaysou</span></p>
+                        <div id="forFitnessAndfamilyAndhealthy" class="module3-part2-top-img">
+                            <div>
+                                <img src="./img/groupFour/fitness.png" alt="fitness">
+                                <p class="large-font-grey" style="font-size: 1vw;">For fitness</p>
+                            </div>
+                            <div>
+                                <img src="./img/groupFour/family.png" alt="family">
+                                <p class="large-font-grey" style="font-size: 1vw;">For family</p>
+                            </div>
+                            <div>
+                                <img src="./img/groupFour/healthy.png" alt="healthy">
+                                <p class="large-font-grey" style="font-size: 1vw;">For healthy</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- 第四模块 -->
+            <div id="contentModule4" class="content-module4">
+                <p id="specification" class="large-font-black large-font-white">Product Specification</p>
+                <div id="contentModule4Top" class="content-module4-top">
+                    <div>
+                        <p>Product Model</p>
+                        <p>Dance 430</p>
+                    </div>
+                    <div>
+                        <p>Capacity</p>
+                        <p>4.3qt/4.89L</p>
+                    </div>
+                    <div>
+                        <p>Power</p>
+                        <p>1500 w</p>
+                    </div>
+                    <div>
+                        <p>Power Supply</p>
+                        <p>AC 120 V, 60 Hz</p>
+                    </div>
+                    <div>
+                        <p>Color</p>
+                        <p>Black</p>
+                    </div>
+                    <div>
+                        <p>Temp Range</p>
+                        <p>180-400 °F</p>
+                    </div>
+                    <div>
+                        <p>Time Range</p>
+                        <p>1-60 min</p>
+                    </div>
+                    <div>
+                        <p>Dimensions</p>
+                        <p>12.83x9.8x11.69 in</p>
+                    </div>
+                    <div>
+                        <p>Weight</p>
+                        <p>7.27 lb/3.3kg</p>
+                    </div>
+                </div>
+                <p id="include" class="large-font-black large-font-white" style="margin:20vh 0 10vh 0;">What Is Include</p>
+                <div id="contentModule4Bottom" class="content-module4-bottom">
+                    <div>
+                        <img src="./img/groupFive/manual.png" alt="manual">
+                        <p>Use Manual</p>
+                    </div>
+                    <div>
+                        <img src="./img/groupFive/4.3quart.png" alt="4.3quart">
+                        <p>4.3-Quart Air Fryer</p>
+                    </div>
+                    <div>
+                        <img src="./img/groupFive/non-stick.png" alt="non-stick">
+                        <p>Non-stick Plate</p>
+                    </div>
+                </div>
+                
+            </div>
+            <!-- 第五模块 -->
+            <div id="contentModule5" class="content-module5">
+                <div id="contentModule5Oldman" class="content-module5-img-oldMan">
+                    <!-- <img src="./img/groupSix/oldMan.png" alt="oldMan"> -->
+                </div>
+                <div class="module5-recommended">
+                    <p class="large-font-black">Recommended</p>
+                    <div class="module5-recommended-purifier">
+                        <div>
+                            <img src="./img/groupSix/608.png" alt="608">
+                            <p>Okaysou Cayman 608 Air Purifier for Home Allergies and Pets, Medical Grade H13 True HEPA Filter, Odor Eliminator, White</p>
+                            <span>$99.99</span>
+                            <p>
+                                <a href="javascript:void(0)">
+                                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="76px" height="36px" viewBox="0 0 76 36" enable-background="new 0 0 76 36" xml:space="preserve">  <image id="image0" width="76" height="36" x="0" y="0"
+                                        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAkCAMAAAAU7iwuAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+                                    AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA2FBMVEX///8An+wAnukAnucA
+                                    n+gAn+gAn+cAnukAn+gAn+gAoOgAn+cAn+cAnukAmf8An+cAgP8AnPEAnugAnugAnesAn+gAv/8A
+                                    n+gAnucAn+gAn+oAnucAn+cAn+gAnugAn+oAn+gAo+sAn+kAnucAnugAnugAnugAnucAnucAnucA
+                                    nucAn+gAn+gAoesAm+kAnugAn+kAnugAnugApvIAn+gAofIAn+gAn+i85vn////p9/34/P/g8/3w
+                                    +f7F6fqJ0vRjxPGY2PZHue7Y8PzP7fux4vh4zPOl3fep3MBpAAAAN3RSTlMAKHS40uT2ZtxlQ9nX
+                                    RwWXAhLFuyffBMS2mEjVYFjIGP4ZaKCw0PD44NjAeHAmF9NQm8YU2hO9hV4xMgAAAAFiS0dEAIgF
+                                    HUgAAAAHdElNRQflCxoSJTFkpgG4AAABsElEQVRIx63WaVPCMBAG4ADlFATk0KICcnmLeC3bg6NF
+                                    +v//kQmBITpJ7fV+KB06fSbJts0SIiSVzmjZHARMLqtl0ikiT74QlBFTKEqo0kkUiqVc+UOdVqNS
+                                    LNWaaNXP4lgAjfrRarbiWQCt5sFqn8e1AC7ae0yPbwHo3OokYQF0mFW7TAbTGHaVjAVwTbFuUliX
+                                    kF5femWOLMY8BNa/IQNQYKZl2YiLENqADFWYxckQmE4yftgSEcBCNll6XPGBrhGX0ntGZOyDOS5u
+                                    BAxcNOjZBm35PWMyUWG8Ao6I0TGtAEz8lt8zIbc+BbCQDeWIgU2dLaKjwu781mxloidiC/rvgk1d
+                                    mnvVM8uxHcExgx1pCRwD1wrsgYz8sC0bmctOaV3341MtP8CQPP6zZg54iLZlmjvMQ/4rzRN59nud
+                                    7A1b67mNtscnS0vJCipN/yXsi+7ytZSlG/YTRBdxqbrGPkE1LbhFZ656LmC6+2y/Bscs11Ne6/BN
+                                    YBZq1RTRE9zq3g5bHXmP3Gcc8vEptAeNeNaX0B7QksZqXGa/GheaSjkqNS1JOrRitGYvr+gd47ah
+                                    P2CJD17FjBeWAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTExLTI2VDEwOjM3OjQ5KzA4OjAwHMu/
+                                    xwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMS0yNlQxMDozNzo0OSswODowMG2WB3sAAAAgdEVY
+                                    dHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3Vt
+                                    ZW50OjpQYWdlcwAxp/+7LwAAABd0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQAMzYvmTztAAAAFnRF
+                                    WHRUaHVtYjo6SW1hZ2U6OldpZHRoADc2s1o5ZAAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdl
+                                    L3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjM3ODk0MjY5CwT6CQAAABJ0RVh0VGh1bWI6
+                                    OlNpemUAMTMwM0JClMwNxAAAAEZ0RVh0VGh1bWI6OlVSSQBmaWxlOi8vL2FwcC90bXAvaW1hZ2Vs
+                                    Yy9pbWd2aWV3Ml85XzE2Mzc4MDg0MTYxNjg3NTkwXzcyX1swXTX/pqgAAAAASUVORK5CYII=" ></image>
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                        <div>
+                            <img src="./img/groupSix/718.png" alt="718">
+                            <p>Okaysou Apollo 718 Air Purifier for Home Large Room up to 500 sq.ft with H13 True HEPA Filter Cleaner, Eliminate 99.9% Allergies and Pets, Smokers, Mold, Pollen, Dust</p>
+                            <span>$129.99</span>
+                            <p>
+                                <a href="javascript:void(0)">
+                                    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+                                    <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+                                    <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="76px" height="36px" viewBox="0 0 76 36" enable-background="new 0 0 76 36" xml:space="preserve">  <image id="image0" width="76" height="36" x="0" y="0"
+                                        href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEwAAAAkCAMAAAAU7iwuAAAABGdBTUEAALGPC/xhBQAAACBjSFJN
+                                    AAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAA2FBMVEX///8An+wAnukAnucA
+                                    n+gAn+gAn+cAnukAn+gAn+gAoOgAn+cAn+cAnukAmf8An+cAgP8AnPEAnugAnugAnesAn+gAv/8A
+                                    n+gAnucAn+gAn+oAnucAn+cAn+gAnugAn+oAn+gAo+sAn+kAnucAnugAnugAnugAnucAnucAnucA
+                                    nucAn+gAn+gAoesAm+kAnugAn+kAnugAnugApvIAn+gAofIAn+gAn+i85vn////p9/34/P/g8/3w
+                                    +f7F6fqJ0vRjxPGY2PZHue7Y8PzP7fux4vh4zPOl3fep3MBpAAAAN3RSTlMAKHS40uT2ZtxlQ9nX
+                                    RwWXAhLFuyffBMS2mEjVYFjIGP4ZaKCw0PD44NjAeHAmF9NQm8YU2hO9hV4xMgAAAAFiS0dEAIgF
+                                    HUgAAAAHdElNRQflCxoSJTFkpgG4AAABsElEQVRIx63WaVPCMBAG4ADlFATk0KICcnmLeC3bg6NF
+                                    +v//kQmBITpJ7fV+KB06fSbJts0SIiSVzmjZHARMLqtl0ikiT74QlBFTKEqo0kkUiqVc+UOdVqNS
+                                    LNWaaNXP4lgAjfrRarbiWQCt5sFqn8e1AC7ae0yPbwHo3OokYQF0mFW7TAbTGHaVjAVwTbFuUliX
+                                    kF5femWOLMY8BNa/IQNQYKZl2YiLENqADFWYxckQmE4yftgSEcBCNll6XPGBrhGX0ntGZOyDOS5u
+                                    BAxcNOjZBm35PWMyUWG8Ao6I0TGtAEz8lt8zIbc+BbCQDeWIgU2dLaKjwu781mxloidiC/rvgk1d
+                                    mnvVM8uxHcExgx1pCRwD1wrsgYz8sC0bmctOaV3341MtP8CQPP6zZg54iLZlmjvMQ/4rzRN59nud
+                                    7A1b67mNtscnS0vJCipN/yXsi+7ytZSlG/YTRBdxqbrGPkE1LbhFZ656LmC6+2y/Bscs11Ne6/BN
+                                    YBZq1RTRE9zq3g5bHXmP3Gcc8vEptAeNeNaX0B7QksZqXGa/GheaSjkqNS1JOrRitGYvr+gd47ah
+                                    P2CJD17FjBeWAAAAJXRFWHRkYXRlOmNyZWF0ZQAyMDIxLTExLTI2VDEwOjM3OjQ5KzA4OjAwHMu/
+                                    xwAAACV0RVh0ZGF0ZTptb2RpZnkAMjAyMS0xMS0yNlQxMDozNzo0OSswODowMG2WB3sAAAAgdEVY
+                                    dHNvZnR3YXJlAGh0dHBzOi8vaW1hZ2VtYWdpY2sub3JnvM8dnQAAABh0RVh0VGh1bWI6OkRvY3Vt
+                                    ZW50OjpQYWdlcwAxp/+7LwAAABd0RVh0VGh1bWI6OkltYWdlOjpIZWlnaHQAMzYvmTztAAAAFnRF
+                                    WHRUaHVtYjo6SW1hZ2U6OldpZHRoADc2s1o5ZAAAABl0RVh0VGh1bWI6Ok1pbWV0eXBlAGltYWdl
+                                    L3BuZz+yVk4AAAAXdEVYdFRodW1iOjpNVGltZQAxNjM3ODk0MjY5CwT6CQAAABJ0RVh0VGh1bWI6
+                                    OlNpemUAMTMwM0JClMwNxAAAAEZ0RVh0VGh1bWI6OlVSSQBmaWxlOi8vL2FwcC90bXAvaW1hZ2Vs
+                                    Yy9pbWd2aWV3Ml85XzE2Mzc4MDg0MTYxNjg3NTkwXzcyX1swXTX/pqgAAAAASUVORK5CYII=" ></image>
+                                    </svg>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        var a = document.body.scrollHeight;
+        window.addEventListener('scroll',function(event){
+            const scrollTop = document.documentElement.scrollTop || window.pageYOffset || document.body.scrollTop;
+            const value = (scrollTop/(a/2)).toFixed(5)
+            const container = document.getElementById('container')
+            const module1 = document.getElementById('module1')
+            console.log(scrollTop,'scrollTop')
+
+            // 第一部分
+            const contentModule2 = document.getElementById('content-module2')
+            const module2Part1 = document.getElementById('content-module2-part1')
+            const module2Part1Left = document.getElementById('module2-part1-left')
+            const module2Part1Right = document.getElementById('module2-part1-right')
+            // 第二部分
+            const touchScreen =document.getElementById('touchScreen')
+            const touchScreenBtn = document.getElementById('touchScreenBtn')
+            const module2LeftWord = document.getElementById('module2LeftWord')
+            const buttonGroupOne = document.getElementById('buttonGroupOne')
+            // 第三部分
+            const contentModule2Part2 = document.getElementById('content-module2-part2')
+            const module2Part2Left = document.getElementById('module2-part2-left')
+            const module2Part2Right = document.getElementById('module2-part2-right')
+            
+            const convenient = document.getElementById('convenient')
+            const preset = document.getElementById('preset')
+            const defaultSettings = document.getElementById('default-setting')
+            const part2RightCol1 = document.getElementById('part2-right-col1')
+            const part2RightCol2 = document.getElementById('part2-right-col2')
+            // 第四部分
+            const contentModule2Part3 = document.getElementById('content-module2-part3')
+            const module2Part3Left = document.getElementById('module2Part3Left')
+            const hotAir = document.getElementById('hotAir')
+            const circulation = document.getElementById('circulation')
+            const technology = document.getElementById('technology')
+            const animationThree = document.getElementById('animationThree')
+            
+            // 第五部分 cookAnyFood
+            const contentModule2Part4 = document.getElementById('contentModule2Part4')
+            const module2Part4First = document.getElementById('module2Part4First')
+            const part4FirstLeft = document.getElementById('part4FirstLeft')
+            const cookAnyFood = document.getElementById('cookAnyFood')
+            const inMinutes = document.getElementById('inMinutes')
+            const withLessOil = document.getElementById('withLessOil')
+            const shrimpAndChick = document.getElementById('shrimpAndChick')
+            const cakeAndSteak = document.getElementById('cakeAndSteak')
+
+            // 第六部分
+            const A = document.getElementById('A')
+            const difference = document.getElementById('difference')
+            const sacrificing = document.getElementById('sacrificing')
+            const secondImg = document.getElementById('secondImg')
+
+            // 第七部分
+            const effortless = document.getElementById('effortless')
+            const cleaning = document.getElementById('cleaning')
+            const features = document.getElementById('features')
+
+            // 第八部分
+            const contentModule3 = document.getElementById('content-module3')
+            const autoShutOff = document.getElementById('autoShutOff')
+            const safety = document.getElementById('safety')
+            const openAndClose = document.getElementById('openAndClose')
+            const okaysouExperience = document.getElementById('okaysouExperience')
+            const forFandFandH = document.getElementById('forFitnessAndfamilyAndhealthy')
+            
+            // 第九部分
+            const contentModule4 = document.getElementById('contentModule4')
+            const specification = document.getElementById('specification')
+            const contentModule4Top = document.getElementById('contentModule4Top')
+            const include = document.getElementById('include')
+            const contentModule4Bottom = document.getElementById('contentModule4Bottom')
+            
+            // 第十部分
+            const contentModule5 = document.getElementById('contentModule5')
+            const contentModule5Oldman = document.getElementById('contentModule5Oldman')
+            
+            function part1(){
+                //第一部分鼠标交互效果 
+                fnRotationAndScale(container,0,1-value,-1000*value)
+                if(value>0.25){
+                    module1.style.opacity = value*4-.6
+                    if(module1.style.opacity>1){
+                        module1.style.opacity=1
+                    }else if(module1.style.opacity>0.8){
+                        container.style.opacity = 0
+                    }else{
+                        container.style.opacity = 1
+                    }
+                }else{
+                    module1.style.opacity = 0
+                    container.style.opacity = 1
+                }
+            }
+
+            
+            // 第二部分鼠标交互效果
+            function part2(){
+                if(scrollTop <= 2400){
+                    // module2Part1Right.style.opacity = 0
+                    contentModule2.style.position = 'relative'
+                    contentModule2.style.top = 0
+                    touchScreen.style.transform = "translateY(1000px)"
+                    touchScreenBtn.style.transform = "translateY(900px)"
+                    module2LeftWord.style.transform = "translateY(800px)"
+                    buttonGroupOne.style.transform = "translateY(700px)"
+                    touchScreen.style.display = "none"
+                    touchScreenBtn.style.display = "none"
+                    module2LeftWord.style.display = "none"
+                    buttonGroupOne.style.display = "none"
+                }else if(scrollTop<=2600){
+                    contentModule2.style.position = 'fixed'
+                    contentModule2.style.top = 0 
+                    // module2Part1Right.style.opacity = '.5'
+                    touchScreen.style.display = "block"
+                    fnRotationAndScale(touchScreen,0,1,(2600-scrollTop)*5)
+                }else if(scrollTop<=2800){
+                    // module2Part1Right.style.opacity = '1'
+                    fnRotationAndScale(touchScreen,0,1,0)
+                    touchScreenBtn.style.display = "block"
+                    fnRotationAndScale(touchScreenBtn,0,1,(2800-scrollTop)*5)
+                }else if(scrollTop<=3000){
+                    fnRotationAndScale(touchScreenBtn,0,1,0)
+                    module2LeftWord.style.display = "block"
+                    fnRotationAndScale(module2LeftWord,0,1,(3000-scrollTop)*5)
+                }else if(scrollTop<=3200){
+                    fnRotationAndScale(module2LeftWord,0,1,0)
+                    buttonGroupOne.style.display = "flex"
+                    fnRotationAndScale(buttonGroupOne,0,1,(3200-scrollTop)*5)
+                    contentModule2.style.position = 'fixed'
+                    contentModule2.style.top = 0
+                }else if(scrollTop<4200){
+                    fnRotationAndScale(buttonGroupOne,0,1,0)
+                    contentModule2.style.position = 'relative'
+                    contentModule2.style.top = "60vh"
+                    // module2Part1Right.style.opacity = 1
+                    
+                }
+            }
+
+            // 第三部分鼠标交互效果
+            function part3(){
+                if(scrollTop<4200){
+                    convenient.style.transform = "translateY(1000px)"
+                    preset.style.transform = "translateY(900px)"
+                    defaultSettings.style.transform = "translateY(800px)"
+                    part2RightCol1.style.transform = "translateY(700px)"
+                    part2RightCol2.style.transform = "translateY(600px)"
+
+                    convenient.style.display = "none"
+                    preset.style.display = "none"
+                    defaultSettings.style.display = "none"
+                    part2RightCol1.style.display = "none"
+                    part2RightCol2.style.display = "none"
+                    
+                }else if(scrollTop<4360){
+                    contentModule2.style.position = 'fixed'
+                    contentModule2.style.top = '-120vh'
+                    convenient.style.display = "block"
+                    fnRotationAndScale(convenient,0,1,(4360-scrollTop)*5)
+                }else if(scrollTop<4520){
+                    fnRotationAndScale(convenient,0,1,0)
+                    preset.style.display = "block"
+                    fnRotationAndScale(preset,0,1,(4520-scrollTop)*5)
+                }else if(scrollTop<4680){
+                    fnRotationAndScale(preset,0,1,0)
+                    defaultSettings.style.display = "block"
+                    fnRotationAndScale(defaultSettings,0,1,(4680-scrollTop)*5)
+                }else if(scrollTop<4840){
+                    fnRotationAndScale(defaultSettings,0,1,0)
+                    part2RightCol1.style.display = "flex"
+                    fnRotationAndScale(part2RightCol1,0,1,(4840-scrollTop)*5)
+                }else if(scrollTop<5000){
+                    fnRotationAndScale(part2RightCol1,0,1,0)
+                    part2RightCol2.style.display = "flex"
+                    fnRotationAndScale(part2RightCol2,0,1,(5000-scrollTop)*5)
+                    contentModule2.style.position = 'fixed'
+                    contentModule2.style.top = "-120vh"
+                }else if(scrollTop<5200){
+                    fnRotationAndScale(part2RightCol2,0,1,0)
+                    contentModule2.style.position = 'relative'
+                    contentModule2.style.top = "140vh"
+                }
+            }
+
+            // 第四部分交互动画
+            function part4(){
+                if(scrollTop<6000){
+                    // module2Part3Left
+                    scrollTop>5200?module2Part3Left.style.opacity = ".5":module2Part3Left.style.opacity = "0"
+                    contentModule2Part3.style.position = 'static'
+                    contentModule2Part3.style.marginTop = '140vh'
+                    // contentModule2Part3
+                    hotAir.style.transform = "translateY(1000px)"
+                    circulation.style.transform = "translateY(900px)"
+                    technology.style.transform = "translateY(800px)"
+                    animationThree.style.transform = "translateY(700px)"
+
+                    hotAir.style.display = "none"
+                    circulation.style.display = "none"
+                    technology.style.display = "none"
+                    animationThree.style.display = "none"
+                }else if(scrollTop<6160){
+                    module2Part3Left.style.opacity = "1"
+                    contentModule2Part3.style.position = 'fixed'
+                    contentModule2Part3.style.top = "-140vh"
+                    hotAir.style.display = "block"
+                    fnRotationAndScale(hotAir,0,1,(6160-scrollTop)*5)
+                }else if(scrollTop<6320){
+                    fnRotationAndScale(hotAir,0,1,0)
+                    circulation.style.display = "block"
+                    fnRotationAndScale(circulation,0,1,(6320-scrollTop)*5)
+                }else if(scrollTop<6480){
+                    fnRotationAndScale(circulation,0,1,0)
+                    technology.style.display = "block"
+                    fnRotationAndScale(technology,0,1,(6480-scrollTop)*5)
+                }else if(scrollTop<6640){
+                    fnRotationAndScale(technology,0,1,0)
+                    animationThree.style.display = "block"
+                    fnRotationAndScale(animationThree,0,1,(6640-scrollTop)*5)
+                }else if(scrollTop<6800){
+                    fnRotationAndScale(animationThree,0,1,0)
+                    contentModule2Part3.style.position = 'fixed'
+                    contentModule2Part3.style.top = '-140vh'
+                    contentModule2Part3.style.marginTop = '140vh'
+                }else if(scrollTop<6900){
+                    contentModule2Part3.style.position = 'static'
+                    contentModule2Part3.style.marginTop = '220vh'
+                }
+            }
+
+            function part5(){
+                if(scrollTop<8000){
+                    contentModule2Part4.style.position = 'static'
+                    contentModule2Part4.style.top = 0
+                    contentModule2Part4.style.marginTop = 0
+                    // contentModule2Part3
+                    cookAnyFood.style.transform = "translateY(1000px)"
+                    inMinutes.style.transform = "translateY(900px)"
+                    withLessOil.style.transform = "translateY(800px)"
+                    shrimpAndChick.style.transform = "translateY(700px)"
+                    cakeAndSteak.style.transform = "translateY(600px)"
+
+                    cookAnyFood.style.display = "none"
+                    inMinutes.style.display = "none"
+                    withLessOil.style.display = "none"
+                    shrimpAndChick.style.display = "none"
+                    cakeAndSteak.style.display = "none"
+
+                }else if(scrollTop<8160){
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-15vh"
+                    cookAnyFood.style.display = "block"
+                    fnRotationAndScale(cookAnyFood,0,1,(8160-scrollTop)*5)
+                }else if(scrollTop<8320){
+                    fnRotationAndScale(cookAnyFood,0,1,0)
+                    inMinutes.style.display = "block"
+                    fnRotationAndScale(inMinutes,0,1,(8320-scrollTop)*5)
+                }else if(scrollTop<8480){
+                    fnRotationAndScale(inMinutes,0,1,0)
+                    withLessOil.style.display = "block"
+                    fnRotationAndScale(withLessOil,0,1,(8480-scrollTop)*5)
+                }else if(scrollTop<8640){
+                    fnRotationAndScale(withLessOil,0,1,0)
+                    shrimpAndChick.style.display = "flex"
+                    fnRotationAndScale(shrimpAndChick,0,1,(8640-scrollTop)*5)
+                }else if(scrollTop<8800){
+                    fnRotationAndScale(shrimpAndChick,0,1,0)
+                    cakeAndSteak.style.display = "flex"
+                    fnRotationAndScale(cakeAndSteak,0,1,(8800-scrollTop)*5)
+                    // contentModule2Part4.style.marginTop = 0
+                }else if(scrollTop<8960){
+                    fnRotationAndScale(cakeAndSteak,0,1,0)
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-15vh"
+                    contentModule2Part4.style.marginTop = 0
+                }else if(scrollTop<9800){
+                    contentModule2Part4.style.position = 'static'
+                    contentModule2Part4.style.marginTop = '100vh'
+                }
+            }
+
+            function part6(){
+                if(scrollTop<9800){
+                    // contentModule2Part3
+                    A.style.transform = "translateY(1000px)"
+                    difference.style.transform = "translateY(900px)"
+                    sacrificing.style.transform = "translateY(800px)"
+
+                    A.style.display = "none"
+                    difference.style.display = "none"
+                    sacrificing.style.display = "none"
+
+                }else if(scrollTop<9960){
+                    contentModule2Part4.style.marginTop = '100vh'
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-220vh"
+                    A.style.display = "block"
+                    fnRotationAndScale(A,0,1,(9960-scrollTop)*5)
+                }else if(scrollTop<10120){
+                    fnRotationAndScale(A,0,1,0)
+                    difference.style.display = "block"
+                    fnRotationAndScale(difference,0,1,(10120-scrollTop)*5)
+                }else if(scrollTop<10280){
+                    fnRotationAndScale(difference,0,1,0)
+                    sacrificing.style.display = "block"
+                    fnRotationAndScale(sacrificing,0,1,(10280-scrollTop)*5)
+                }else if(scrollTop<10440){
+                    fnRotationAndScale(sacrificing,0,1,0)
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-260vh"
+                    contentModule2Part4.style.marginTop = "140vh"
+
+                }else if(scrollTop<11240){
+                    contentModule2Part4.style.position = 'static'
+                    contentModule2Part4.style.marginTop = "140vh"
+
+                }
+            }
+
+            function part7(){
+                if(scrollTop<11240){
+                    effortless.style.transform = "translateY(1000px)"
+                    cleaning.style.transform = "translateY(900px)"
+                    features.style.transform = "translateY(800px)"
+
+                    effortless.style.display = "none"
+                    cleaning.style.display = "none"
+                    features.style.display = "none"
+
+                }else if(scrollTop<11400){
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-380vh"
+                    contentModule2Part4.style.marginTop = "160vh"
+                    effortless.style.display = "block"
+                    fnRotationAndScale(effortless,0,1,(11400-scrollTop)*5)
+                }else if(scrollTop<11560){
+                    fnRotationAndScale(effortless,0,1,0)
+                    cleaning.style.display = "block"
+                    fnRotationAndScale(cleaning,0,1,(11560-scrollTop)*5)
+                }else if(scrollTop<11700){
+                    fnRotationAndScale(cleaning,0,1,0)
+                    features.style.display = "block"
+                    fnRotationAndScale(features,0,1,(11700-scrollTop)*5)
+                }else if(scrollTop<11860){
+                    fnRotationAndScale(features,0,1,0)
+                    contentModule2Part4.style.position = 'fixed'
+                    contentModule2Part4.style.top = "-380vh"
+                    contentModule2Part4.style.marginTop = "160vh"
+
+                }else if(scrollTop<12860){
+                    contentModule2Part4.style.position = 'static'
+                    // contentModule2Part4.style.top = "220vh"
+                    contentModule2Part4.style.marginTop = "220vh"
+                }
+            }
+
+            function part8(){
+                if(scrollTop<12860){
+                    contentModule3.style.position = 'static'
+                    contentModule3.style.marginTop = '120vh'
+
+                    autoShutOff.style.transform = "translateY(1000px)"
+                    safety.style.transform = "translateY(900px)"
+                    openAndClose.style.transform = "translateY(800px)"
+                    okaysouExperience.style.transform = "translateY(700px)"
+                    forFandFandH.style.transform = "translateY(600px)"
+                    
+                    
+                    autoShutOff.style.display = "none"
+                    safety.style.display = "none"
+                    openAndClose.style.display = "none"
+                    okaysouExperience.style.display = "none"
+                    forFandFandH.style.display = "none"
+
+                }else if(scrollTop<13000){
+                    contentModule3.style.position = 'fixed'
+                    contentModule3.style.top = "-120vh"
+                    contentModule3.style.marginTop = "120vh"
+                    autoShutOff.style.display = "block"
+                    fnRotationAndScale(autoShutOff,0,1,(13000-scrollTop)*5)
+                }else if(scrollTop<13160){
+                    fnRotationAndScale(autoShutOff,0,1,0)
+                    safety.style.display = "block"
+                    fnRotationAndScale(safety,0,1,(13160-scrollTop)*5)
+                }else if(scrollTop<13320){
+                    fnRotationAndScale(safety,0,1,0)
+                    openAndClose.style.display = "flex"
+                    fnRotationAndScale(openAndClose,0,1,(13320-scrollTop)*5)
+                }else if(scrollTop<13480){
+                    fnRotationAndScale(openAndClose,0,1,0)
+                    okaysouExperience.style.display = "inline"
+                    fnRotationAndScale(okaysouExperience,0,1,(13480-scrollTop)*5)
+                }else if(scrollTop<13640){
+                    fnRotationAndScale(okaysouExperience,0,1,0)
+                    forFandFandH.style.display = "flex"
+                    fnRotationAndScale(forFandFandH,0,1,(13640-scrollTop)*5)
+                }else if(scrollTop<13800){
+                    fnRotationAndScale(forFandFandH,0,1,0)
+                    contentModule3.style.position = 'fixed'
+                    contentModule3.style.top = "-60vh"
+                    contentModule3.style.marginTop = "60vh"
+                }else if(scrollTop<16000){
+                    contentModule3.style.position = 'static'
+                    contentModule3.style.marginTop = "70vh"
+
+                }
+            }
+
+            function part9(){
+                if(scrollTop<14000){
+                    contentModule4.style.position = 'static'
+                    contentModule4.style.marginTop = '180vh'
+                }else if(scrollTop<16000){
+                    contentModule4.style.position = 'static'
+                    contentModule4.style.marginTop = '140vh'
+
+                    // specification.style.transform = "translateY(1000px)"
+                    // contentModule4Top.style.transform = "translateY(900px)"
+                    // include.style.transform = "translateY(800px)"
+                    // contentModule4Bottom.style.transform = "translateY(700px)"
+                    
+                    // specification.style.display = "none"
+                    // contentModule4Top.style.display = "none"
+                    // include.style.display = "none"
+                    // contentModule4Bottom.style.display = "none"
+
+                }else if(scrollTop<16160){
+                    // contentModule4.style.position = 'fixed'
+                    // contentModule4.style.top = "-180vh"
+                    // contentModule4.style.marginTop = '180vh'
+                    
+                    // specification.style.display = "block"
+                    // fnRotationAndScale(specification,0,(16160-scrollTop)/30,(16160-scrollTop))
+                }else if(scrollTop<16320){
+                    // fnRotationAndScale(specification,0,1,0)
+                    // contentModule4Top.style.display = "block"
+                    // fnRotationAndScale(contentModule4Top,0,1,(16320-scrollTop)*5)
+                    contentModule4Top.style.opacity = 1
+                }else if(scrollTop<16480){
+                    // contentModule4.style.position = 'static'
+                    // contentModule4.style.marginTop = "120vh"
+
+                    // fnRotationAndScale(contentModule4Top,0,1,0)
+                    // include.style.display = "block"
+                    // fnRotationAndScale(include,0,1,(16480-scrollTop)*5)
+                }else if(scrollTop<16640){
+                    contentModule4Top.style.opacity = .5
+                    // fnRotationAndScale(include,0,1,0)
+                    // contentModule4Bottom.style.display = "flex"
+                    // fnRotationAndScale(contentModule4Bottom,0,1,(16640-scrollTop)*5)
+                }else if(scrollTop<16700){
+                    // fnRotationAndScale(contentModule4Bottom,0,1,0)
+                }
+            }
+            function part10(){
+                if(scrollTop<16700){
+                    // contentModule5.style.marginTop = '180vh'
+                }else if(scrollTop<17500){
+                    // contentModule5.style.marginTop = 0
+                    // contentModule5Oldman.style.opacity = '.5'
+                }else if(scrollTop<18000){
+                //    contentModule5Oldman.style.opacity = '1'
+                }
+            }
+
+
+            part1();
+            part2();
+            part3();  
+            part4();  
+            part5();
+            part6();
+            part7();
+            part8();
+            part9();
+            part10();
+        })
+        
+        
+    </script>
+</body>
+</html>

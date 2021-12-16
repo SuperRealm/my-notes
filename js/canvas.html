@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>canvas</title>
+</head>
+<body>
+    <canvas id="canvas-test" width="200" height="300"></canvas>
+    <canvas id="canvas-text" width="200" height="300"></canvas>
+    <button onclick="click()" type="button">click me </button>
+    <script>
+        var canvas = document.getElementById('canvas-test')
+        if(canvas.getContext){
+            console.log('你的浏览器支持canvas')
+        }else {
+            console.log('你的浏览器不支持canvas')
+        }
+        var ctx = canvas.getContext("2d")
+        ctx.clearRect(0,0,200,200)
+        ctx.fillstyle = "#ddd"
+        ctx.fillRect(10,10,130,130)
+        var path = new Path2D();
+        path.arc(75,75,50,0,Math.PI*2,true)
+        path.moveTo(110,75);
+        path.arc(75,75,35,0,Math.PI,false)
+        path.moveTo(65,65)
+        path.arc(60,65,5,0,Math.PI*2,true)
+        path.moveTo(95,65)
+        path.arc(90,65,5,0,Math.PI*2,true)
+        ctx.strokeStyle = "#00f"
+        ctx.stroke(path)
+
+        // var text = document.getElementById('canvas-text')
+        // let ctx1 = canvas.getContext("2d")
+        // ctx1.clearRect(200,200,text.width,text.height)
+        // ctx1.shadowOffsetX = 2
+        // ctx1.shadowOffsetY = 2
+        // ctx1.shadowBlur = 2;
+        // ctx1.shadowColor = '#666'
+        // ctx1.font = '24px'
+        // ctx1.fillStyle = 'red'
+        // ctx1.fillText('带阴影的文字',20,40)
+
+    </script>
+</body>
+</html>

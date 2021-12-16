@@ -1,0 +1,5 @@
+product_handle,rating,username,date£¨optional:Default to current time if not entered£©,review content,Image£¨optional£©,Video£¨optional£©,Verify£¨optional£©
+floral-white-top,0,,2021/6/16,Do like how it does the job. The company stands behind their products. Easy to deal with great service would recommend this unit to anyone!,https://images-na.ssl-images-amazon.com/images/I/51AWkcuUakL.jpg,https://images-na.ssl-images-amazon.com/images/I/E1PK4wkK3DS.mp4,YES
+floral-white-top,1,Cherry,2021Äê7ÔÂ6ÈÕ,test csv import 1,,,YES
+floral-white-top,3,Gavin S,2021/6/16,Do like how it does the job. The company stands behind their products. Easy to deal with great service would recommend this unit to anyone!,https://images-na.ssl-images-amazon.com/images/I/51AWkcuUakL.jpg,https://images-na.ssl-images-amazon.com/images/I/E1PK4wkK3DS.mp4,YES
+floral-white-top1,5,Norry,,test csv import 1,,,YES
